@@ -3,18 +3,19 @@ var socket = require('socket.io');
 
 var app = express();
 
+const port = 5000;
 
-server = app.listen(8080, function(){
-    console.log('server is running on port 8080')
+
+server = app.listen(port, () => {
+    console.log(`Server is running on port ${port}`)
 });
 
 io = socket(server);
 
 io.on('connection', (socket) => {
-    console.log(socket.id);
+    console.log('socketID: ', socket.id);
 
-    socket.on('SEND_MESSAGE', function(data){
-        
+    socket.on('SEND_MESSAGE', (data) => {
         io.emit('RECEIVE_MESSAGE', data);
     })
 });
