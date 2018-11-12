@@ -3,6 +3,7 @@ var socket = require('socket.io');
 const mongoose = require('mongoose');
 const cors = require('cors');
 const Message = require('./backend/models/Message');
+const User = require('./backend/models/Users');
 require('dotenv').config();
 
 var app = express();
@@ -35,9 +36,31 @@ io.on('connection', (socket) => {
 
         io.emit('RECEIVE_MESSAGE', data);
     })
+
     socket.on('ONLINE', (data) => {
         console.log('usernamed id', socket.id);
+        const user = {
+            username: data.user,
+            socketId: socket.id
+        }
+        
+        User.findOne({socketId: socket.id})
+            .then( () => {
+                new User(user)
+                    .save()
+                    .catch(err => console.log(err));
+            });
+
         io.emit('USER_ONLINE', data);
+    });
+
+    socket.on('disconnect', () => {
+        User.findOneAndRemove({ socketId: socket.id }, (err) => {
+            if (err)
+                console.log(err);
+            else
+                console.log('User Deleted!');
+        });
     });
 });
 
