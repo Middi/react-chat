@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-export default class Modal extends Component {
-  render() {
-    return (
+const Modal = ({username, updateUsername, toggleModal, online}) => (
       <div className="modal-bg">
         <div className="modal">
-            <input type="text" placeholder="Username" value={this.state.username} onChange={ev => this.setState({username: ev.target.value})} className="form-control"/>
+        <span className="close" onClick={toggleModal}>+</span>
+        <h2>Select a Username</h2>
+            <input type="text" placeholder="Username" name="username" value={username} onChange={updateUsername} className="form-control"/>
+            <button className="btn" onClick={online}>GO</button>
         </div>
-        
-        
       </div>
-    )
-  }
-}
+    );
+
+export default Modal;

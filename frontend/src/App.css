@@ -1,0 +1,138 @@
+.modal-bg {
+  background: rgba(0, 0, 0, 0.5);
+  height: 100vh;
+  width: 100vw;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center
+}
+
+.modal {
+  position: relative;
+  height: 190px;
+  width: 380px;
+  text-align: center;
+  background: white;
+  color: rgba(44, 45, 48, 1.0);
+  border-radius: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  padding: 30px;
+}
+
+.close {
+  position: absolute;
+  top: 2px;
+  right: 6px;
+  font-size: 1.8rem;
+  transform: rotate(45deg);
+  color: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
+.close:hover {
+  color: rgba(0, 0, 0, 1);
+}
+
+.modal > input {
+  height: 24px;
+  width: 230px;
+  border-radius: 4px;
+  border: 1px solid rgba(145, 145, 147, 0.8);
+  padding: 2px 8px;
+  font-size: 1.2rem;
+  outline: none;
+}
+
+.modal > input:focus {
+  border: 1px solid rgba(80, 80, 80, 1.0);
+}
+
+.btn {
+  background-color: rgba(17, 136, 84, 1.0);
+  border: none;
+  color: white;
+  font-size: 1rem;
+  height: 38px;
+  box-sizing: border-box;
+  width: 110px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin: 0 10px;
+}
+
+.btn:hover {
+  background-color: rgba(18, 125, 78, 1.0);
+}
+
+
+.wrapper {
+  display: flex;
+}
+
+aside {
+  min-width: 260px;
+  background: rgba(49, 63, 77, 1.0);
+  height: 100vh;
+}
+
+main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 20px;
+}
+
+.messages {
+  height: 100%;
+}
+
+.text {
+  min-height: 50px;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+textarea {
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid rgba(145, 145, 147, 0.8);
+  padding: 4px 8px;
+  height: 38px;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  outline: none;
+  resize: none;
+}
+
+.users-heading {
+  color: white
+}
+
+ul {
+  list-style: none;
+}
+
+.user-list-item {
+  line-height: 1;
+  position: relative;
+  color: rgba(188, 192, 198, 1.0);
+}
+
+.user-list-item:before {
+  content: '';
+  bottom: 3px;
+  left: -14px;
+  height: 10px;
+  width: 10px;
+  background-color: green;
+  position: absolute;
+  border-radius: 10px;
+  line-height: 1;
+
+}
