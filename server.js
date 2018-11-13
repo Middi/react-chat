@@ -6,9 +6,13 @@ const Message = require('./backend/models/Message');
 const User = require('./backend/models/Users');
 require('dotenv').config();
 
-var app = express();
 
 const port = 5000;
+
+var app = express();
+
+var server = require('http').Server(app)
+var io = socket(server);
 
 // Setup for CORS / Accept requests from our client
 app.use(cors({
@@ -19,12 +23,6 @@ app.use(cors({
 mongoose.connect(process.env.DB)
     .then(() => console.log('MongoDB Connected'))
     .catch(err => console.log(err));
-
-server = app.listen(port, () => {
-    console.log(`Server is running on port ${port}`)
-});
-
-io = socket(server);
 
 io.on('connection', (socket) => {
     console.log('socketID: ', socket.id);
@@ -44,30 +42,48 @@ io.on('connection', (socket) => {
             socketId: socket.id
         }
         
-        User.findOne({socketId: socket.id})
-            .then( () => {
+        User.findOne({username: user.username})
+            .then( (res) => {
+                if(res) {
+                    console.log('username taken')
+                    io.emit('USER_TAKEN', res);
+                }
+                else {
                 new User(user)
                     .save()
+                    .then(() => io.emit('USER_ONLINE', user.username))
                     .catch(err => console.log(err));
+                }
             });
-
-        io.emit('USER_ONLINE', data);
     });
 
     socket.on('disconnect', () => {
+
         User.findOneAndRemove({ socketId: socket.id }, (err) => {
             if (err)
                 console.log(err);
             else
                 console.log('User Deleted!');
         });
+
+      
     });
+});
+
+server.listen(port, () => {
+    console.log(`Server is running on port ${port}`)
 });
 
 
 
 // Get request
-app.get('/', (req, res) => {
+app.get('/messages', (req, res) => {
     Message.find()
-        .then(data => res.json(data))
+        .then(data => res.json(data));
 });
+
+app.get('/users', (req, res) => {
+    User.find()
+        .then(data => res.json(data));
+});
+

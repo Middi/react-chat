@@ -10,6 +10,10 @@ const MessageSchema = new Schema({
     message: {
         type: String,
         required: true
+    },
+    key: {
+        type: String,
+        required: true
     }
 })
 

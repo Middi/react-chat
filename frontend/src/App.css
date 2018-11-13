@@ -101,6 +101,7 @@ main {
 textarea {
   width: 100%;
   border-radius: 6px;
+  background: none;
   border: 1px solid rgba(145, 145, 147, 0.8);
   padding: 4px 8px;
   height: 38px;

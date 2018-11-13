@@ -4,7 +4,7 @@ const Messages = ({ messages }) => (
     <div className="messages">
         {messages.map(message => {
             return (
-                <div key={message.message + message.author}>{message.author}: {message.message}</div>
+                <div key={message.key}>{message.author}: {message.message}</div>
             )
         })}
     </div>
